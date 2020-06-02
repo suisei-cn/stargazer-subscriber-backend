@@ -1,0 +1,7 @@
+starlette
+uvicorn
+PyJWT
+httpx==0.12.1
+websockets
+motor
+jsonschema
