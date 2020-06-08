@@ -40,6 +40,7 @@ def on_auth_error(request: Request, exc: Exception):
 
 
 routes = [
+    Route("/stats", endpoints.StatisticsEndpoint),
     Route("/vtubers", endpoints.VtubersEndpoint),
     Route("/users", endpoints.UserEndpoint),
     Route("/users/{user}", endpoints.PerUserEndpoint),

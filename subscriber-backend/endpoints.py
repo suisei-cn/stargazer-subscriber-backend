@@ -133,3 +133,17 @@ class VtubersEndpoint(HTTPEndpoint):
             return PlainTextResponse("Internal Server Error", status_code=HTTP_500_INTERNAL_SERVER_ERROR)
 
         return JSONResponse(resp.json())
+
+
+class StatisticsEndpoint(HTTPEndpoint):
+    async def get(self, request: Request):
+        try:
+            resp = await http.get(urljoin(UPSTREAM_URL, "api/vtubers"))
+            vtubers_count = len(resp.json())
+        except (HTTPError, JSONDecodeError):
+            return PlainTextResponse("Internal Server Error", status_code=HTTP_500_INTERNAL_SERVER_ERROR)
+
+        subscribers_count = await db.estimated_document_count()
+
+        data = {"vtubers": vtubers_count, "subscribers": subscribers_count}
+        return JSONResponse(data)
