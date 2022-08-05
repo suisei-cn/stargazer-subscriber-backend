@@ -1,7 +1,7 @@
 starlette
 uvicorn
 PyJWT
-httpx==0.12.1
+httpx==0.23.0
 websockets
 motor
 jsonschema
