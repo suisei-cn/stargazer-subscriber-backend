@@ -25,7 +25,7 @@ class JWTAuthBackend(AuthenticationBackend):
             return AuthCredentials(["authenticated", "admin"]), SimpleUser("admin")
         else:
             try:
-                decoded = jwt.decode(credentials, SECRET_TOKEN)
+                decoded = jwt.decode(credentials, SECRET_TOKEN, algorithms=["HS256"])
             except jwt.InvalidTokenError:
                 print(credentials)
                 raise AuthenticationError('Invalid auth credentials')

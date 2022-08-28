@@ -105,7 +105,7 @@ class JWTEndpoint(HTTPEndpoint):
 
         expire = request.path_params.get("exp", 600)
         now = int(time.time())
-        token = jwt.encode({"user": user, "exp": now + expire}, SECRET_TOKEN)
+        token = jwt.encode({"user": user, "exp": now + expire}, SECRET_TOKEN, algorithm="HS256")
         return PlainTextResponse(token)
 
 
